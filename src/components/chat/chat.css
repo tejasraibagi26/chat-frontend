@@ -1,0 +1,97 @@
+#chat {
+  width: 100vw;
+  height: 98vh;
+  overflow: hidden;
+}
+
+#chat .chat-outer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: transparent;
+  user-select: none;
+}
+
+#chat .chat-outer .chat-name {
+  width: 100%;
+  height: 50px;
+  background-color: #121212 !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#chat .chat-outer .chat-name .name {
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  padding: 0 20px;
+  background-color: transparent;
+  user-select: none;
+}
+
+#chat .chat-outer .chat-name .leave {
+  background-color: #ed4245;
+  border-radius: 6px;
+  padding: 5px 20px;
+  margin-right: 1rem;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  user-select: none;
+}
+
+#chat .chat-outer .msg-holder {
+  width: 100%;
+  min-height: calc(100% - 100px) !important;
+  overflow: scroll;
+}
+
+#chat .chat-outer .text-box {
+  width: calc(100% - 40px);
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+  background-color: whitesmoke;
+  border-radius: 6px;
+}
+
+#chat .chat-outer .text-box input {
+  width: 80%;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  padding: 0 10px;
+}
+
+#chat .chat-outer .text-box input:focus {
+  outline: none;
+}
+
+#chat .chat-outer .text-box .send {
+  background-color: #57f287;
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 0 6px 6px 0;
+}
+
+@media screen and (max-width: 768px) {
+  #chat .chat-outer .text-box input {
+    width: 65%;
+  }
+  #chat .chat-outer .text-box .send {
+    width: 30%;
+  }
+}

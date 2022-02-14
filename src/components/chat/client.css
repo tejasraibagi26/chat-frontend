@@ -1,0 +1,40 @@
+.cli-msg {
+  min-width: 25%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cli-msg .text-bubble {
+  width: max-content;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cli-msg .text-bubble .circle {
+  min-width: 32px;
+  min-height: 32px;
+  aspect-ratio: 1/1;
+  background-color: #121212;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+}
+
+.cli-msg .text-bubble .text {
+  /* width: calc(max-content + 10%); */
+  background-color: whitesmoke;
+  min-height: 32px;
+  padding: 0 1rem;
+  margin-right: 1rem;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  word-break: break-all;
+}
