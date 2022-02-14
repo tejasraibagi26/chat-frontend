@@ -16,7 +16,7 @@ const Chat = () => {
 
   let scrollRef = useRef();
 
-  const ENDPOINT = "localhost:8080";
+  const ENDPOINT = process.env.REACT_APP_SOCKET;
   useEffect(() => {
     if (username == null || roomName == null) {
       alert("Username or RoomName cannot be empty");
