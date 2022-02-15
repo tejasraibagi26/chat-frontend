@@ -4,12 +4,12 @@ import "./chat.css";
 import ClientMsg from "./clientmsg";
 import Message from "./message";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import queryString from "query-string";
 
 let socket;
 const Chat = () => {
-  const splitSearch = window.location.search.split("?")[1].split("&");
-  const username = splitSearch[0].split(`name=`)[1];
-  const roomName = splitSearch[1].split(`roomName=`)[1];
+  const { username, roomId } = queryString.parse(window.location.search);
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
   const history = useNavigate();
@@ -17,18 +17,43 @@ const Chat = () => {
   let scrollRef = useRef();
 
   const ENDPOINT = process.env.REACT_APP_SOCKET;
+
   useEffect(() => {
-    if (username == null || roomName == null) {
+    async function fetch() {
+      const { data } = await axios.get(
+        `${ENDPOINT}/api/v1/chat/messages/${roomId}`
+      );
+
+      for (let i = 0; i < data.messages.msg.length; i++) {
+        setMessages((prev) => [...prev, data.messages.msg[i]]);
+      }
+    }
+
+    fetch();
+  }, [ENDPOINT, roomId]);
+
+  useEffect(() => {
+    if (username == null || roomId == null) {
       alert("Username or RoomName cannot be empty");
       return;
     }
 
     socket = io(ENDPOINT);
-    socket.emit("join", { username, roomName });
+    socket.emit(
+      "join",
+      {
+        username,
+        roomId: roomId,
+        userId: "620b0439ae26c65fde3adaba",
+      },
+      (err) => {
+        history(`/?err=${err.err}&code=${err.code}`);
+      }
+    );
     return () => {
       socket.close();
     };
-  }, [ENDPOINT, username, roomName]);
+  }, [ENDPOINT, username, roomId, history]);
 
   useEffect(() => {
     socket.on("chat-message", (msg) => {
@@ -43,7 +68,12 @@ const Chat = () => {
   const sendMessage = (e) => {
     e.preventDefault();
     const input = document.getElementById("textbox");
-    const data = { username, roomName, text };
+    const data = {
+      username,
+      roomId: roomId,
+      text,
+      userId: "620b0439ae26c65fde3adaba",
+    };
     socket.emit("chat-text", data);
     setMessages([...messages, data]);
     input.value = "";
@@ -55,7 +85,7 @@ const Chat = () => {
 
   const onLeaveRoom = (e) => {
     e.preventDefault();
-    socket.emit("leave", { username, roomName });
+    socket.emit("leave", { username, roomId });
 
     history("/");
   };
@@ -64,23 +94,23 @@ const Chat = () => {
     <section id="chat">
       <div className="chat-outer">
         <div className="chat-name">
-          <div className="name">{roomName}</div>
+          <div className="name">{roomId}</div>
           <div className="leave" onClick={onLeaveRoom}>
             Leave Room
           </div>
         </div>
         <div className="msg-holder">
           {messages.length === 0 ? (
-            <span>No messages yet.</span>
+            <span className="waiting">Waiting for messages...</span>
           ) : (
-            messages.map((m, i) => {
+            messages.map((m) => {
               return m.username === username ? (
-                <div ref={scrollRef}>
-                  <ClientMsg key={i} username={m.username} text={m.text} />
+                <div ref={scrollRef} key={m._id}>
+                  <ClientMsg username={m.username} text={m.text} />
                 </div>
               ) : (
-                <div ref={scrollRef}>
-                  <Message key={i} username={m.username} text={m.text} />
+                <div ref={scrollRef} key={m._id}>
+                  <Message username={m.username} text={m.text} />
                 </div>
               );
             })

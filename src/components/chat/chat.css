@@ -87,6 +87,10 @@
   border-radius: 0 6px 6px 0;
 }
 
+.waiting {
+  margin: 4rem 2rem;
+}
+
 @media screen and (max-width: 768px) {
   #chat .chat-outer .text-box input {
     width: 65%;

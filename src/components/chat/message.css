@@ -1,15 +1,13 @@
 .msg {
   min-width: 25%;
-  max-width: 75%;
 }
 
 .msg .text-bubble {
-  width: max-content;
   padding: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .msg .text-bubble .circle {
@@ -36,4 +34,9 @@
   justify-content: center;
   align-items: center;
   word-break: break-all;
+}
+@media screen and (min-width: 768px) {
+  .msg .text-bubble {
+    width: max-content;
+  }
 }
