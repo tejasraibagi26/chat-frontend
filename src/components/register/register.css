@@ -1,10 +1,10 @@
-#login {
+#register {
   width: 95vw;
   height: 95vh;
   overflow: hidden;
 }
 
-#login .container {
+#register .container {
   width: 100%;
   height: 100%;
   display: flex;
@@ -17,17 +17,17 @@ h1 {
   margin: 0;
 }
 
-#login .container .title {
+#register .container .title {
   font-size: 3rem;
   margin-bottom: 1rem;
 }
 
-#login .container label {
+#register .container label {
   width: 35%;
   height: 50px;
 }
 
-#login .container label input {
+#register .container label input {
   width: 100%;
   height: 100%;
   background-color: whitesmoke;
@@ -36,20 +36,20 @@ h1 {
   font-size: 18px;
 }
 
-#login .container label .br-top {
+#register .container label .br-top {
   border-radius: 4px 4px 0 0;
   border-bottom: 1px solid grey;
 }
 
-#login .container label .br-down {
+#register .container label .br-down {
   border-radius: 0 0 4px 4px;
 }
 
-#login .container label input:focus {
+#register .container label input:focus {
   outline: none;
 }
 
-#login .container .submit-btn {
+#register .container .submit-btn {
   width: 30%;
   height: 50px;
   font-size: 18px;
@@ -82,15 +82,15 @@ h1 {
 }
 
 @media screen and (max-width: 768px) {
-  #login .container .title {
+  #register .container .title {
     font-size: 2rem;
   }
 
-  #login .container label {
+  #register .container label {
     width: 70%;
   }
 
-  #login .container .submit-btn {
+  #register .container .submit-btn {
     width: 65%;
   }
 
