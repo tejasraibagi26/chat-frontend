@@ -43,7 +43,7 @@ const Register = () => {
       body
     );
     console.log(data);
-    if (data.register.status === 200) {
+    if (data.userData.status === 200) {
       history("/");
     } else setErr(data.register.msg);
   };
