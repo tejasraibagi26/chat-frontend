@@ -12,7 +12,7 @@
 
 .form label input {
   font-size: 18px;
-  border: none;
+  border: 1px solid whitesmoke;
   border-radius: 6px;
   padding: 0 10px;
 }
@@ -20,4 +20,8 @@
 .form label input:focus {
   outline-color: blue;
   /* outline: none; */
+}
+
+.form label .err-border {
+  border: 2px solid red !important;
 }

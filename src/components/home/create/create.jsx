@@ -5,7 +5,12 @@ const CreateForm = ({ handleChange }) => {
   return (
     <div className="form">
       <label>
-        <input type="text" placeholder="Chat name" onChange={handleChange} />
+        <input
+          id="input"
+          type="text"
+          placeholder="Chat name"
+          onChange={handleChange}
+        />
       </label>
     </div>
   );

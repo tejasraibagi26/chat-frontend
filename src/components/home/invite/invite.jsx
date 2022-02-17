@@ -9,6 +9,7 @@ const InviteForm = ({ handleChange }) => {
           type="text"
           placeholder="Enter Invite Code"
           onChange={handleChange}
+          id="input"
         />
       </label>
     </div>

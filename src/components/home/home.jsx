@@ -8,6 +8,7 @@ import io from "socket.io-client";
 import AddSVG from "../../media/add.svg";
 import CreateForm from "./create/create";
 import InviteForm from "./invite/invite";
+import Snackbar from "./snackbar/snackbar";
 
 let socket;
 const Home = () => {
@@ -22,6 +23,7 @@ const Home = () => {
   const [openModal, setOpenModal] = useState(false);
   const [formToLoad, setFormToLoad] = useState(0);
   const [invite, setInvite] = useState(null);
+  const [showSnackbar, setShowSnackbar] = useState(false);
 
   let scrollRef = useRef();
 
@@ -146,11 +148,19 @@ const Home = () => {
   };
 
   const handleText = (e) => {
+    const inputField = document.getElementById("input");
+    inputField.classList.remove("err-border");
     setcreateText(e.target.value);
   };
 
   const sendDate = async (e) => {
     e.preventDefault();
+    if (createText === "") {
+      const inputField = document.getElementById("input");
+      inputField.classList.add("err-border");
+
+      return;
+    }
     if (formToLoad === 0) {
       let obj = {
         chatName: createText,
@@ -174,15 +184,35 @@ const Home = () => {
         obj
       );
 
-      console.log(data);
       if (data.create.status === 200) {
         openChatAddModal(e);
         getChatrooms();
       }
     }
   };
+
+  const copyInviteLink = (e) => {
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+    navigator.clipboard.writeText(
+      `${BASE_URL}/join?invite=${invite}&id=${userId}`
+    );
+
+    console.log("copied");
+
+    snackbar(e);
+  };
+
+  const snackbar = (e) => {
+    e.preventDefault();
+    console.log("snackbar");
+    setShowSnackbar((prev) => !prev);
+    setTimeout(() => {
+      setShowSnackbar((prev) => !prev);
+    }, 2000);
+  };
   return (
     <section id="home">
+      {showSnackbar ? <Snackbar /> : ""}
       {openModal ? (
         <div className="addChatModal">
           <div className="close" onClick={openChatAddModal}>
@@ -243,7 +273,15 @@ const Home = () => {
             <div className="outer">
               <div className="topbar">
                 <div className="roomName">{roomName} </div>
-                <div className="inviteCode">Invite Code: {invite}</div>
+                <div className="inviteCode">
+                  Invite Code: {invite}
+                  <div className="copy" onClick={copyInviteLink}>
+                    <img
+                      src="https://img.icons8.com/material-rounded/24/000000/copy.png"
+                      alt="Copy Invite link"
+                    />{" "}
+                  </div>
+                </div>
               </div>
               <div className="message-container">
                 {messages.length > 0

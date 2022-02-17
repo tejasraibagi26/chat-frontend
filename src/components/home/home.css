@@ -95,11 +95,26 @@
   align-items: center;
   justify-content: space-between;
 }
+
 #home .container .chat-screen .outer .topbar .roomName {
   font-size: 32px;
   font-weight: bold;
   padding-left: 2rem;
   font-family: "Prompt", sans-serif !important;
+}
+
+#home .container .chat-screen .outer .topbar .inviteCode {
+  display: flex;
+  width: max-content;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#home .container .chat-screen .outer .topbar .inviteCode img {
+  margin-left: 1rem;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }
 
 #home .container .chat-screen .outer .message-container {
@@ -151,6 +166,7 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   cursor: pointer;
+  user-select: none;
 }
 
 .center {
@@ -247,4 +263,6 @@
   font-weight: bold;
   letter-spacing: 2px;
   text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
 }
